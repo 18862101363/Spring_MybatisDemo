@@ -19,7 +19,7 @@ public class MyPerson {
     private String id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})  // CascadeType.PERSIST无法级联保存解决（https://blog.csdn.net/u012382571/article/details/50977185）：
     @JoinColumn(name = "MY_HOUSE_ID")
     private MyHouse myHouse;
@@ -56,6 +56,8 @@ public class MyPerson {
         this.myHouse = myHouse;
         this.myComponent = myComponent;
     }
+
+
 
     public MyPerson() {
     }
