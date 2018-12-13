@@ -1,5 +1,6 @@
 package com.oracle.hibernate;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +15,15 @@ public class MyPerson {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid")
     @GeneratedValue(generator = "idGenerator")
+    @Column(name = "ID")
     private String id;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})  // CascadeType.PERSIST无法级联保存解决（https://blog.csdn.net/u012382571/article/details/50977185）：
+    @JoinColumn(name = "MY_HOUSE_ID")
+    private MyHouse myHouse;
+
 
     @Embedded
 //    @AttributeOverrides( {
@@ -43,7 +52,10 @@ public class MyPerson {
         this.myComponent = myComponent;
     }
 
-
+    public MyPerson(MyHouse myHouse, MyComponent myComponent) {
+        this.myHouse = myHouse;
+        this.myComponent = myComponent;
+    }
 
     public MyPerson() {
     }
@@ -52,6 +64,7 @@ public class MyPerson {
     public String toString() {
         return "MyPerson{" +
                 "id='" + id + '\'' +
+                ", myHouse=" + myHouse +
                 ", myComponent=" + myComponent +
                 '}';
     }

@@ -19,17 +19,16 @@ public class BaseHibernateDao {
 
 
     /**
-     *
      * @param id
      */
-    public void findMyPersonById(String id) {
+    public MyPerson findMyPersonById(String id) {
         Session session = sessionFactory.getCurrentSession();
         MyPerson person = (MyPerson) session.get(MyPerson.class, id);
         System.out.println("person :  " + person);
+        return person;
     }
 
     /**
-     *
      * @param myPerson
      */
     public void saveMyPerson(MyPerson myPerson) {
@@ -38,6 +37,16 @@ public class BaseHibernateDao {
 
     }
 
+
+    /**
+     * @param id
+     */
+    public void delMyPersonById(String id) {
+        Session session = sessionFactory.getCurrentSession();
+        MyPerson person = findMyPersonById(id);
+        session.delete(person);
+
+    }
 
 
 }

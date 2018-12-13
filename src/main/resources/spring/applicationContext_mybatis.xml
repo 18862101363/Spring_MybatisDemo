@@ -84,7 +84,7 @@
 
             如果要扫描多个包中的mapper接口，则包与包之间用半角逗号隔开
          -->
-        <property name="basePackage" value="com.oracle.test.mapper"/>
+        <property name="basePackage" value="com.oracle.mybatis.env.test.mapper"/>
         <!-- 注意：
                 这里不能使用 <property name="sqlSessionFactory" ref="sqlSessionFactory"/>，会导致数据库连接配置文件加载失败，
                 使用	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
@@ -142,7 +142,7 @@
 
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.oracle.mybatis.production.mapper"/>
+        <property name="basePackage" value="com.oracle.mybatis.env.production.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_production"/>
     </bean>
 

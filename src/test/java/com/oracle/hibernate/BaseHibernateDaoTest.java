@@ -1,7 +1,8 @@
-package com.test.oracle.hibernate;
+package com.oracle.hibernate;
 
 import com.oracle.hibernate.BaseHibernateDao;
 import com.oracle.hibernate.MyComponent;
+import com.oracle.hibernate.MyHouse;
 import com.oracle.hibernate.MyPerson;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,21 @@ public class BaseHibernateDaoTest extends AbstractJUnit4SpringContextTests {
     private BaseHibernateDao hibernateDao;
 
     @Test
-    public void testFindMyUserbyId() {
-
+    public void testDelMyPersonById() {
+        hibernateDao.delMyPersonById("8a9572fc67a6ad640167a6ad68ec0000");
 
     }
 
 
     @Test
     public void testSaveMyPerson() {
-        MyPerson person = new MyPerson(new MyComponent("tom", "tom123"));
+        MyPerson person = new MyPerson(new MyHouse(),new MyComponent("tom", "tom123"));
         hibernateDao.saveMyPerson(person);
         hibernateDao.findMyPersonById(person.getId());
     }
+
+
+
 
 
 }
