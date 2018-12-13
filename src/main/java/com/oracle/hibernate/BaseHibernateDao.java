@@ -53,14 +53,33 @@ public class BaseHibernateDao {
 
 
     /**
-     *
      * @param refId
      * @return
      */
     public List<MyUser> queryBySql(String refId) {
         Session session = sessionFactory.getCurrentSession();
         String hql = "SELECT p FROM MyPerson p WHERE  p.myComponent.myComponentRef.id = '" + refId + "'";
-        return  session.createQuery(hql).list();
+        return session.createQuery(hql).list();
+    }
+
+
+    /**
+     *
+     * @param id
+     * @param name
+     * @throws InterruptedException
+     */
+    public void updateMyUserNameById(String id, String name) throws InterruptedException {
+        Session session = sessionFactory.getCurrentSession();
+
+        MyPerson person = (MyPerson)session.get(MyPerson.class, id);
+
+        Thread.sleep(5000);
+
+        person.getMyComponent().setName(name);
+
+        session.saveOrUpdate(person);
+
     }
 
 

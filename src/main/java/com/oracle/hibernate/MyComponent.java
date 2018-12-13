@@ -12,18 +12,17 @@ import javax.persistence.*;
 public class MyComponent {
 
 
+
     @Column(name = "NAME")
     private String name;
     @Column(name = "PASSWORD")
     private String password;
 
+
     @OneToOne(fetch = FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE})
     @JoinColumn(name = "REF_ID")
     private MyComponentRef myComponentRef;
-
-
-
 
 
     public MyComponent(String name, String password) {
@@ -40,6 +39,9 @@ public class MyComponent {
     public MyComponent() {
     }
 
+
+
+
     public String getPassword() {
         return password;
     }
@@ -55,6 +57,8 @@ public class MyComponent {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
     public MyComponentRef getMyComponentRef() {
         return myComponentRef;

@@ -5,6 +5,7 @@ import com.oracle.hibernate.MyComponent;
 import com.oracle.hibernate.MyHouse;
 import com.oracle.hibernate.MyPerson;
 import com.oracle.mybatis.env.test.model.MyUser;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,7 +35,7 @@ public class BaseHibernateDaoTest extends AbstractJUnit4SpringContextTests {
         MyComponentRef ref = new MyComponentRef("test");
         MyComponent myComponent = new MyComponent("tom", "tom123", ref);
 
-        MyPerson person = new MyPerson(new MyHouse(), myComponent);
+        MyPerson person = new MyPerson(new MyHouse(), myComponent,"male");
         hibernateDao.saveMyPerson(person);
         hibernateDao.findMyPersonById(person.getId());
     }
@@ -43,8 +44,48 @@ public class BaseHibernateDaoTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testQueryBySql() {
         List<MyUser> myUsers = hibernateDao.queryBySql("402880e867a77b860167a77b8cbb0001");
-        if (myUsers.size() > 0){
+        if (myUsers.size() > 0) {
             System.out.println(myUsers.get(0));
+        }
+
+    }
+
+
+
+    @Test
+    public void testUpdateMyUserNameById() {  //org.hibernate.StaleObjectStateException
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    hibernateDao.updateMyUserNameById("402880e867a7b91d0167a7b9383b0000", "lily");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    hibernateDao.updateMyUserNameById("402880e867a7b91d0167a7b9383b0000", "tony");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            Thread.sleep(100000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }

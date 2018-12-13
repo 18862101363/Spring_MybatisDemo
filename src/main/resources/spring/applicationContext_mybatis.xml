@@ -155,7 +155,7 @@
 
 
     <!--开启注解事务-->
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
 
 
     <!--<tx:annotation-driven transaction-manager="txManager"/>-->
