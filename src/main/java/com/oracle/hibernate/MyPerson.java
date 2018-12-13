@@ -37,7 +37,8 @@ public class MyPerson {
 
 
     @Version
-    private int version;  // org.hibernate.StaleObjectStateException
+    private int version;  // org.hibernate.StaleObjectStateException   .
+                    //   version 不可以再component中定义
 
 
     @Column(name = "GENDER")
