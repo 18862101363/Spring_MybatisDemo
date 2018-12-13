@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+  
+  
+
+
+<!--mybatis全局的配置参数，这是MyBatis 修改操作运行过程细节的重要的步骤，需要时再配置-->
+<!--<settings>-->
+	<!--打开mybatis的延迟加载
+	<setting name="lazyLoadingEnabled" value="true"/>-->
+	<!--将积极加载给为消极加载，及按需加载
+	<setting name="agressiveLazyLoading" value="false"/>-->
+	<!--mybatis默认是支持SqlSession对象的一级缓存的，无需再mybatis的全局配置文件中配置
+		mybatis默认是不mapper级别的二级缓存的，需要首先在mybatis全局配置文件中配置开启二级缓存总开关，
+											   再分别在mapper.xml映射文件中开启各自的二级缓存
+											   最后让相应的pojo类实现序列化接口，以从不同的缓存介质中取出数据，对其反序列化
+	-->
+	<!--<setting name="cacheEnabled" value="true"/>-->
+<!--</settings>-->
+
+
+<!--别名定义-->
+<typeAliases>  	
+	<!--针对单个别名定义
+		type:类型路径
+		alias:别名
+	
+  	 <typeAlias type="com.bean.User" alias="userEntity"/>	-->
+  	 <!--批量定义别名：如果有很多的pojo类需要简写来定义别名，那么一个个定义就不方便，就可以使用批量定义别名的方式
+  	 	name:指定包名，mybatis自动扫描该包中的pojo类，自动定义相应的pojo类的别名，别名为pojo类名(类名首字母大写或小写都可以)
+  	 -->
+  	 <!--<package name="com.oracle.test.service.model" />&lt;!&ndash;之类定义com.bean包中的Pojo类进行自动扫描定义别名，这里自由一个User类&ndash;&gt;-->
+  	 <!--如果多个包中的pojo类需要定义别名，那就加入多个package标签就可以了
+  	  <package name="xxx.xxx.xxx..." />
+  	  <package name="xxx.xxx.xxx..." />
+  	   .....
+  	 -->
+</typeAliases>
+  
+
+
+
+ 
+ 
+ <!--加载映射文件	 	
+<mappers>
+	
+	<package name="com.oracle.test.mapper"/>
+		
+</mappers>
+  	--> 
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+
+
+
+
+
+
+
+  	
+  </configuration> 	
